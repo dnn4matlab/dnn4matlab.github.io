@@ -5,10 +5,10 @@
     <meta charset='utf-8' />
     <meta http-equiv="X-UA-Compatible" content="chrome=1" />
     <meta name="description" content="dnn4matlab.github.io : " />
-
+    <link rel="shortcut icon" href="http://dnn4matlab.github.io/images/favicon.ico" >
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
-    <title>dnn4matlab.github.io</title>
+    <title>Deep Neural Networks for Matlab</title>
   </head>
 
   <body>
@@ -39,7 +39,7 @@ we deliver trained models on ImageNet dataset, which gives top-5 accuracy 13% on
 <a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Evaluate ImageNet trained model on your data</h3>
 
 <p>File <a href="https://github.com/dnn4matlab/code/blob/master/eval.m" target="_blank">eval.m</a> shows how to evaluate trained model on your data. It first downloads
-trained model from a server, and stores it into <i>/models</i> dictionary (this is done only once). 
+trained model from a server, and stores it into <a href="https://github.com/dnn4matlab/code/blob/master/models" target="_blank">/models</a> directory (this is done only once). 
 
 <pre><code>load_imagenet_model();
 predictions = test("doggy.png");
@@ -72,8 +72,8 @@ Feel free to define your own architectures, and try how they work. We provide ar
 Plan(json);
 Run();</code></pre>
 
-<p>Models are stored in directory <i>models</i>. After training MNIST model is available by calling:</p>
-<pre><code>load_model("mnist");</code></pre>
+<p>Models are stored in directory <a href="https://github.com/dnn4matlab/code/blob/master/models" target="_blank">/models</a>. After training MNIST model is available by calling:</p>
+<pre><code>load_model("models/mnist.m");</code></pre>
 
 <h4><a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>ImageNet</h4>
 <p>Training dataset for ImageNet is much bigger than MNIST. To get it you have to register on <a href="http://www.image-net.org/" target="_blank">Image-Net website</a>.</p>
