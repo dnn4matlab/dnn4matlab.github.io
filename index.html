@@ -62,6 +62,9 @@ end
 
 
 <h3><a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Train your own model</h3>
+<p>Files in a directory <a href="https://github.com/dnn4matlab/code/blob/master/plans/" target="_blank">plans</a> describe various neural networks architecture. 
+Feel free to define your own architectures, and try how they work. We provide architectures for MNIST, and ImageNet models.</p>
+
 <h4><a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>MNIST</h4>
 
 <p>File <a href="https://github.com/dnn4matlab/code/blob/master/training.m" target="_blank">training.m</a> trains MNIST model. It first downloads MNIST dataset.</p>
@@ -76,7 +79,9 @@ Run();</code></pre>
 <p>Training dataset for ImageNet is much bigger than MNIST. To get it you have to register on <a href="http://www.image-net.org/" target="_blank">Image-Net website</a>.</p>
 
 <h3><a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Internals</h3>
-<p></p>
+<p>Entire model is a global variable called <b>Plan</b>. To access it call</p>
+<pre><code>global Plan</code></pre>
+<p>All layers are stored in a directory <a href="https://github.com/dnn4matlab/code/blob/master/layers" target="_blank">/layers</a>, and code to verify their correctness is a file <a href="https://github.com/dnn4matlab/code/blob/master/GC.m" target="_blank">GC.m (gradient checker)</a>. To test new layer, please extend file <a href="https://github.com/dnn4matlab/code/blob/master/plans/tests.txt" target="_blank">tests.m</a>, and run <a href="https://github.com/dnn4matlab/code/blob/master/GC.m" target="_blank">GC.m</a>.</p>
 
 
 <h3><a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
