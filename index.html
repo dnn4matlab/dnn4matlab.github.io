@@ -30,22 +30,26 @@
 
 <p>dnn4matlab provides a fast CPU and GPU (CUDA) code to train large neural networks. Code is developed in Matlab, and contains CUDA bindings. With this code
 we deliver trained models on ImageNet dataset, which gives top-5 accuracy 13% on ImageNet validation set. Main focus of this code is to give reasonable computer vision models
-to people having no experience in field. Feel free to use, modify and sell this code for any purpose (commercial, or academic). Please just mention at the end where you get
-it from.</p>
+to people having no experience in field. If you look for broader (harder) framework then we recommend to use <a href="http://www.torch.ch" target="_blank">Torch 7</a>. Feel free to use, modify and sell dnn4matlab for any purpose (commercial, or academic). Please just mention at the end where you get it from.</p>
 
 <p> To get started just checkout our repository:</p>
 <pre><code>$ git clone https://github.com/dnn4matlab/code
 </code></pre>
 
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Evaluate ImageNet trained model on your data</h3>
+Code runs as it is without any compilation on CPU. However, to enable GPU support you have to compile CUDA libraries. Our code supports
+only NVIDIA GPUs, and we recommend to use at least GTX 480. To compile code go to the directory <a href="https://github.com/dnn4matlab/code/blob/master/gpu" target="_blank">/gpu</a>
+and call <code>make</code>.
+
+
+<h3><a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Evaluate ImageNet trained model on your data</h3>
 
 <p>File <a href="https://github.com/dnn4matlab/code/blob/master/eval.m" target="_blank">eval.m</a> shows how to evaluate trained model on your data. It first downloads
 trained model from a server, and stores it into <a href="https://github.com/dnn4matlab/code/blob/master/models" target="_blank">/models</a> directory (this is done only once). 
 
 <pre><code>load_imagenet_model();
 predictions = test("data/doggy.png");% You can use an url.
-predictions[1:10]
+fprinf('Top-5 predictions:\n');
+predictions(1:5)
 </code></pre>
 
 Evaluating a single image is quite slow in compare to evaluating many images in the same time. We recommend to store 128 images of the size 224 x 224 in a single array. 
@@ -55,8 +59,8 @@ at first, because we download entire imagenet validation set (50k images) from o
 imgs = get_images()
 predictions = test(imgs);
 for i = 1, 128
-  imagesc(squeeze(imgs[i, :, :, :]))
-  predictions[i, 1]
+  imagesc(squeeze(imgs(i, :, :, :)))
+  predictions(i, 1)
   waitforbuttonpress
 end
 </code></pre>
@@ -69,8 +73,7 @@ Feel free to define your own architectures, and try how they work. We provide re
 
 
 <p>File <a href="https://github.com/dnn4matlab/code/blob/master/training.m" target="_blank">training.m</a> trains MNIST model. It first downloads MNIST dataset.</p>
-<pre><code>
-addpath(genpath('.'));
+<pre><code>addpath(genpath('.'));
 % Choose any out of following three plans.
 % Plan('cifar');
 % Plan('imagenet');
@@ -88,14 +91,21 @@ Please place entire training dataset in <a href="https://github.com/dnn4matlab/c
 Training to 13% of validation accuracy takes around 6 days on NVIDIA Titan GPU. You need at least GTX 480 to train this model. Training on a CPU would take ages.</p>
 
 <h3><a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Internals</h3>
-<p>Entire model is a global variable called <b>Plan</b>. To access it call</p>
-<pre><code>global Plan</code></pre>
-<p>All layers are stored in a directory <a href="https://github.com/dnn4matlab/code/blob/master/layers" target="_blank">/layers</a>, and code to verify their correctness is a file <a href="https://github.com/dnn4matlab/code/blob/master/tests/GC.m" target="_blank">/tests/GC.m (gradient checker)</a>. To test new layer, please extend file <a href="https://github.com/dnn4matlab/code/blob/master/plans/tests.txt" target="_blank">/plans/tests.m</a>, and run <a href="https://github.com/dnn4matlab/code/blob/master/GC.m" target="_blank">/tests/GC.m</a>. Moreover, to check that your GPU code is equivalent to your CPU code call <a href="https://github.com/dnn4matlab/code/blob/master/tests/GC_gpu.m" target="_blank">/tests/GC_gpu.m</a>.</p> 
+<p>Entire model is a global variable called <b>Plan</b>. To access it call <code>global plan</code>
+All layers are stored in a directory <a href="https://github.com/dnn4matlab/code/blob/master/layers" target="_blank">/layers</a>, and code to verify their correctness is a file <a href="https://github.com/dnn4matlab/code/blob/master/tests/GC.m" target="_blank">/tests/GC.m (gradient checker)</a>. To test new layer, please extend file <a href="https://github.com/dnn4matlab/code/blob/master/plans/tests.txt" target="_blank">/plans/tests.m</a>, and run <a href="https://github.com/dnn4matlab/code/blob/master/GC.m" target="_blank">/tests/GC.m</a>. Moreover, to check that your GPU code is equivalent to your CPU code call <a href="https://github.com/dnn4matlab/code/blob/master/tests/GC_gpu.m" target="_blank">/tests/GC_gpu.m</a>.</p> 
 
 
 <h3><a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors</h3>
 
-<p>Project developed by Emily Denton, <a href="https://www.cs.nyu.edu/~zaremba/" target="_blank">Wojciech Zaremba</a> and <a href="http://www.cs.nyu.edu/~zaremba/" target="_blank">Rob Fergus</a>. If you use this package, please cite: XXX, and have fun ! </p>
+<p>Project developed by Emily Denton, <a href="https://www.cs.nyu.edu/~zaremba/" target="_blank">Wojciech Zaremba</a> and <a href="http://www.cs.nyu.edu/~zaremba/" target="_blank">Rob Fergus</a>. If you use this package, please cite:</p>
+<pre><code>@article{denton2014exploiting,
+ title={Exploiting Linear Structure Within Convolutional Networks for Efficient Evaluation},
+ author={Denton, Emily and Zaremba, Wojciech and Bruna, Joan and LeCun, Yann and Fergus, Rob},
+ journal={arXiv preprint arXiv:1404.0736},
+ year={2014}
+}
+</code></pre>
+<p>Have fun!</p>
 
 <h3>
       </section>
