@@ -16,7 +16,7 @@
     <!-- HEADER -->
     <div id="header_wrap" class="outer">
         <header class="inner">
-          <a id="forkme_banner" href="https://github.com/dnn4matlab">View on GitHub</a>
+          <a id="forkme_banner" href="https://github.com/dnn4matlab/code">View on GitHub</a>
 
           <h1 id="project_title">Deep Neural Networks for Matlab</h1>
         </header>
@@ -28,8 +28,10 @@
         <h3>
 <a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Overview</h3>
 
-<p>dnn4matlab provides a fast CPU and GPU (CUDA) code to train large scale neural networks. Code is developed in Matlab, and contains CUDA bindings. With this code
-we deliver trained models on ImageNet dataset, which gives top-5 accuracy 13% on ImageNet validation set.</p>
+<p>dnn4matlab provides a fast CPU and GPU (CUDA) code to train large neural networks. Code is developed in Matlab, and contains CUDA bindings. With this code
+we deliver trained models on ImageNet dataset, which gives top-5 accuracy 13% on ImageNet validation set. Main focus of this code is to give reasonable computer vision models
+to people having no experience in field. Feel free to use, modify and sell this code for any purpose (commercial, or academic). Please just mention at the end where you get
+it from.</p>
 
 <p> To get started just checkout our repository:</p>
 <pre><code>$ git clone https://github.com/dnn4matlab/code
@@ -42,13 +44,13 @@ we deliver trained models on ImageNet dataset, which gives top-5 accuracy 13% on
 trained model from a server, and stores it into <a href="https://github.com/dnn4matlab/code/blob/master/models" target="_blank">/models</a> directory (this is done only once). 
 
 <pre><code>load_imagenet_model();
-predictions = test("doggy.png");
+predictions = test("data/doggy.png");% You can use an url.
 predictions[1:10]
 </code></pre>
 
 Evaluating a single image is quite slow in compare to evaluating many images in the same time. We recommend to store 128 images of the size 224 x 224 in a single array. 
 Code <a href="https://github.com/dnn4matlab/code/blob/master/eval128.m" target="_blank">eval128.m</a> shows how to evaluate 128 images simultaneously. This might take a second
-at first, because we download entire validation set from our servers.</p>
+at first, because we download entire imagenet validation set (50k images) from our servers.</p>
 <pre><code>load_imagenet_model();
 imgs = get_images()
 predictions = test(imgs);
@@ -63,7 +65,7 @@ end
 
 <h3><a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Train your own model</h3>
 <p>Files in a directory <a href="https://github.com/dnn4matlab/code/blob/master/plans/" target="_blank">plans</a> describe various neural networks architecture. 
-Feel free to define your own architectures, and try how they work. We provide architectures for MNIST, and ImageNet models.</p>
+Feel free to define your own architectures, and try how they work. We provide reasonable architectures for MNIST, and ImageNet models.</p>
 
 <h4><a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>MNIST</h4>
 
