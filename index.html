@@ -68,10 +68,10 @@ end
 
 
 <h3><a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Train your own model</h3>
-<p>Files in a directory <a href="https://github.com/dnn4matlab/code/blob/master/plans/" target="_blank">plans</a> describe various neural networks architecture. 
+<p>Files in a directory <a href="https://github.com/dnn4matlab/code/blob/master/plans/" target="_blank">/plans</a> describe various neural networks architecture. 
 Feel free to define your own architectures, and try how they work. We provide reasonable architectures for MNIST, CIFAR-10, and ImageNet models.</p>
 
-Models available in this package achieve following performance:
+Models available in this package achieve following performance (you can find current state-of-art at <a href="http://rodrigob.github.io/are_we_there_yet/build/classification_datasets_results.html" target="_blank">here</a>):
 </br>
 </br>
 <center>
@@ -84,12 +84,12 @@ Models available in this package achieve following performance:
   <tr>
     <td>MNIST</td>
     <td></td> 
-    <td></td> 
+    <td>no one cares</td> 
   </tr>
   <tr>
     <td>CIFAR-10</td>
     <td></td> 
-    <td></td> 
+    <td>no one cares</td> 
   </tr>
   <tr>
     <td>ImageNet</td>
@@ -119,8 +119,8 @@ Please place entire training dataset in <a href="https://github.com/dnn4matlab/c
 Training takes around 6 days on NVIDIA Titan GPU. You need at least GTX 480 to train this model. Training on a CPU would take ages.</p>
 
 <h3><a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Internals</h3>
-<p>Entire model is a global variable called <b>Plan</b>. To access it call <code>global plan</code>
-All layers are stored in a directory <a href="https://github.com/dnn4matlab/code/blob/master/layers" target="_blank">/layers</a>, and code to verify their correctness is a file <a href="https://github.com/dnn4matlab/code/blob/master/tests/GC.m" target="_blank">/tests/GC.m (gradient checker)</a>. To test new layer, please extend file <a href="https://github.com/dnn4matlab/code/blob/master/plans/tests.txt" target="_blank">/plans/tests.m</a>, and run <a href="https://github.com/dnn4matlab/code/blob/master/GC.m" target="_blank">/tests/GC.m</a>. Moreover, to check that your GPU code is equivalent to your CPU code call <a href="https://github.com/dnn4matlab/code/blob/master/tests/GC_gpu.m" target="_blank">/tests/GC_gpu.m</a>.</p> 
+<p>Entire model is a global variable called <b>Plan</b>. To access it call <code>global plan</code>.
+All layers are stored in a directory <a href="https://github.com/dnn4matlab/code/blob/master/layers" target="_blank">/layers</a>, and code to verify their correctness is a file <a href="https://github.com/dnn4matlab/code/blob/master/tests/GC.m" target="_blank">/tests/GC.m (gradient checker)</a>. To test new layer, please extend file <a href="https://github.com/dnn4matlab/code/blob/master/plans/tests.txt" target="_blank">/plans/tests.m</a>, and run <a href="https://github.com/dnn4matlab/code/blob/master/tests/GC.m" target="_blank">/tests/GC.m</a>. Moreover, to check that your GPU code is equivalent to your CPU code call <a href="https://github.com/dnn4matlab/code/blob/master/tests/GC_gpu.m" target="_blank">/tests/GC_gpu.m</a>.</p> 
 
 
 <h3><a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors</h3>
