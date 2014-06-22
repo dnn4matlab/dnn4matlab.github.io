@@ -46,27 +46,14 @@ and call <code>make</code>.
 
 <p>File <a href="https://github.com/dnn4matlab/code/blob/master/eval.m" target="_blank">/eval.m</a> shows how to evaluate trained model on your data. It first downloads
 trained model from a server, and stores it into <a href="https://github.com/dnn4matlab/code/blob/master/models" target="_blank">/models</a> directory (this is done only once). 
-
-<pre><code>load_imagenet_model();
-predictions = test("data/doggy.png");% You can use an url.
-fprintf('Top-5 predictions:\n');
-predictions(1:5)
-</code></pre>
+<script src="http://gist-it.appspot.com/github/dnn4matlab/code/blob/master/Eval.m?footer=0"></script>
 
 Evaluating a single image is quite slow in compare to evaluating many images in the same time. We recommend to store 128 images of the size 224 x 224 in a single array. 
 Code <a href="https://github.com/dnn4matlab/code/blob/master/eval128.m" target="_blank">/eval128.m</a> shows how to evaluate 128 images simultaneously. This might take a second
 at first, because we download entire imagenet validation set (50k images) from our servers.</p>
-<pre><code>load_imagenet_model();
-imgs = get_images()
-predictions = test(imgs);
-for i = 1, 128
-  imagesc(squeeze(imgs(i, :, :, :)))
-  predictions(i, 1)
-  waitforbuttonpress
-end
-</code></pre>
-<p>This code displays best prediction for every out of 128 examples.</p>
+<script src="http://gist-it.appspot.com/github/dnn4matlab/code/blob/master/Eval128.m?footer=0"></script>
 
+<p>This code displays best prediction for every out of 128 examples.</p>
 
 <h3><a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Train your own model</h3>
 <p>Files in a directory <a href="https://github.com/dnn4matlab/code/blob/master/plans/" target="_blank">/plans</a> describe various neural networks architecture. 
@@ -81,32 +68,35 @@ Models available in this package achieve following performance (you can find cur
     <th>Dataset</th>
     <th>Top-1 error</th> 
     <th>Top-5 error</th> 
+    <th>Training CPU time</th> 
+    <th>Training GPU time</th> 
   </tr>
   <tr>
     <td>MNIST</td>
     <td></td> 
     <td>no one cares</td> 
+    <td></td> 
+    <td></td> 
   </tr>
   <tr>
     <td>CIFAR-10</td>
     <td></td> 
     <td>no one cares</td> 
+    <td></td> 
+    <td></td> 
   </tr>
   <tr>
     <td>ImageNet</td>
     <td></td> 
     <td></td> 
+    <td>&infin;</td> 
+    <td></td> 
   </tr>
 </table>
 </center>
 
-<p>File <a href="https://github.com/dnn4matlab/code/blob/master/training.m" target="_blank">/training.m</a> trains MNIST model. It first downloads MNIST dataset.</p>
-<pre><code>addpath(genpath('.'));
-% Choose any out of following three plans.
-% Plan('cifar');
-% Plan('imagenet');
-Plan('mnist');
-Run();</code></pre>
+<p>File <a href="https://github.com/dnn4matlab/code/blob/master/Training.m" target="_blank">/Training.m</a> trains MNIST model. It first downloads MNIST dataset.</p>
+<script src="http://gist-it.appspot.com/github/dnn4matlab/code/blob/master/Training.m?footer=0"></script>
 
 <p>Models are stored in directory <a href="https://github.com/dnn4matlab/code/blob/master/models" target="_blank">/models</a>. Call 
 <code>Plan('mnist');</code>
@@ -134,7 +124,9 @@ All layers are stored in a directory <a href="https://github.com/dnn4matlab/code
  year={2014}
 }
 </code></pre>
-<p>Have fun!</p>
+<center>
+<p style="font-weight:bold">Have fun!</p>
+</center>
 
 <h3>
       </section>
