@@ -36,17 +36,38 @@ we deliver trained models on ImageNet dataset, which gives top-5 accuracy 13% on
 </code></pre>
 
 <h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Get ImageNet trained model</h3>
+<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Evaluate ImageNet trained model on your data</h3>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<p>File <a href="https://github.com/dnn4matlab/code/blob/master/eval.m" target="_blank">eval.m</a> shows how to evaluate trained model on your data. It first downloads
+trained model from a server, and stores it into <i>/models</i> dictionary (this is done only once). 
 
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Train your own model</h3>
+<pre><code>load_imagenet_model();
+predictions = test("doggy.png");
+predictions[1:10]
+</code></pre>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+Evaluating a single image is quite slow in compare to evaluating many images in the same time. We recommend to store 128 images of the size 224 x 224 in a single array. 
+Code <a href="https://github.com/dnn4matlab/code/blob/master/eval128.m" target="_blank">eval128.m</a> shows how to evaluate 128 images simultaneously.</p>
+<pre><code>load_imagenet_model();
+imgs = get_images()
+predictions = test(imgs);
+for i = 1, 128
+  imagesc(squeeze(imgs[i, :, :, :]))
+  predictions[i, 1]
+  waitforbuttonpress
+end
+</code></pre>
+<p>This code displays best prediction for every out of 128 examples.</p>
 
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+
+<h3><a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Train your own model</h3>
+<p></p>
+
+<h3><a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Internals</h3>
+<p></p>
+
+
+<h3><a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
 
 <p>Project developed by Emily Denton, <a href="https://www.cs.nyu.edu/~zaremba/" target="_blank">Wojciech Zaremba</a> and <a href="http://www.cs.nyu.edu/~zaremba/" target="_blank">Rob Fergus</a>. If you use this package, please cite: XXX </p>
 
