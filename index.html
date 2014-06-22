@@ -44,12 +44,12 @@ and call <code>make</code>.
 
 <h3><a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Evaluate ImageNet trained model on your data</h3>
 
-<p>File <a href="https://github.com/dnn4matlab/code/blob/master/eval.m" target="_blank">/eval.m</a> shows how to evaluate trained model on your data. It first downloads
+<p>File <a href="https://github.com/dnn4matlab/code/blob/master/Eval.m" target="_blank">/Eval.m</a> shows how to evaluate trained model on your data. It first downloads
 trained model from a server, and stores it into <a href="https://github.com/dnn4matlab/code/blob/master/models" target="_blank">/models</a> directory (this is done only once). 
 <script src="http://gist-it.appspot.com/github/dnn4matlab/code/blob/master/Eval.m?footer=0"></script>
 
 Evaluating a single image is quite slow in compare to evaluating many images in the same time. We recommend to store 128 images of the size 224 x 224 in a single array. 
-Code <a href="https://github.com/dnn4matlab/code/blob/master/eval128.m" target="_blank">/eval128.m</a> shows how to evaluate 128 images simultaneously. This might take a second
+Code <a href="https://github.com/dnn4matlab/code/blob/master/Eval128.m" target="_blank">/Eval128.m</a> shows how to evaluate 128 images simultaneously. This might take a second
 at first, because we download entire imagenet validation set (50k images) from our servers.</p>
 <script src="http://gist-it.appspot.com/github/dnn4matlab/code/blob/master/Eval128.m?footer=0"></script>
 
