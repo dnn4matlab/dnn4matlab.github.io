@@ -43,7 +43,7 @@ and call <code>make</code>.
 
 <h3><a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Evaluate ImageNet trained model on your data</h3>
 
-<p>File <a href="https://github.com/dnn4matlab/code/blob/master/eval.m" target="_blank">eval.m</a> shows how to evaluate trained model on your data. It first downloads
+<p>File <a href="https://github.com/dnn4matlab/code/blob/master/eval.m" target="_blank">/eval.m</a> shows how to evaluate trained model on your data. It first downloads
 trained model from a server, and stores it into <a href="https://github.com/dnn4matlab/code/blob/master/models" target="_blank">/models</a> directory (this is done only once). 
 
 <pre><code>load_imagenet_model();
@@ -53,7 +53,7 @@ predictions(1:5)
 </code></pre>
 
 Evaluating a single image is quite slow in compare to evaluating many images in the same time. We recommend to store 128 images of the size 224 x 224 in a single array. 
-Code <a href="https://github.com/dnn4matlab/code/blob/master/eval128.m" target="_blank">eval128.m</a> shows how to evaluate 128 images simultaneously. This might take a second
+Code <a href="https://github.com/dnn4matlab/code/blob/master/eval128.m" target="_blank">/eval128.m</a> shows how to evaluate 128 images simultaneously. This might take a second
 at first, because we download entire imagenet validation set (50k images) from our servers.</p>
 <pre><code>load_imagenet_model();
 imgs = get_images()
@@ -71,8 +71,35 @@ end
 <p>Files in a directory <a href="https://github.com/dnn4matlab/code/blob/master/plans/" target="_blank">plans</a> describe various neural networks architecture. 
 Feel free to define your own architectures, and try how they work. We provide reasonable architectures for MNIST, CIFAR-10, and ImageNet models.</p>
 
+Models available in this package achieve following performance:
+</br>
+</br>
+<center>
+<table style="text-align: center;">
+  <tr>
+    <th>Dataset</th>
+    <th>Top-1 error</th> 
+    <th>Top-5 error</th> 
+  </tr>
+  <tr>
+    <td>MNIST</td>
+    <td></td> 
+    <td></td> 
+  </tr>
+  <tr>
+    <td>CIFAR-10</td>
+    <td></td> 
+    <td></td> 
+  </tr>
+  <tr>
+    <td>ImageNet</td>
+    <td></td> 
+    <td></td> 
+  </tr>
+</table>
+</center>
 
-<p>File <a href="https://github.com/dnn4matlab/code/blob/master/training.m" target="_blank">training.m</a> trains MNIST model. It first downloads MNIST dataset.</p>
+<p>File <a href="https://github.com/dnn4matlab/code/blob/master/training.m" target="_blank">/training.m</a> trains MNIST model. It first downloads MNIST dataset.</p>
 <pre><code>addpath(genpath('.'));
 % Choose any out of following three plans.
 % Plan('cifar');
@@ -87,8 +114,9 @@ loads most recently trained model. To start from scratch just remove trained mod
 
 <p>If you want to train a cifar model uncomment line <code>Plan('cifar');</code>. To train ImageNet model you have to download training data from 
 <a href="http://www.image-net.org/" target="_blank">Image-Net website</a>.
-Please place entire training dataset in <a href="https://github.com/dnn4matlab/code/blob/master/data/imagenet" target="_blank">/data/imagenet</a> directory. To start training, execute file <a href="https://github.com/dnn4matlab/code/blob/master/imagenet_training.m" target="_blank">imagenet_training.m</a>.
-Training to 13% of validation accuracy takes around 6 days on NVIDIA Titan GPU. You need at least GTX 480 to train this model. Training on a CPU would take ages.</p>
+Please place entire training dataset in <a href="https://github.com/dnn4matlab/code/blob/master/data/imagenet" target="_blank">/data/imagenet</a> directory. Then uncomment line
+<code>Plan('imagenet');</code>, and start training.
+Training takes around 6 days on NVIDIA Titan GPU. You need at least GTX 480 to train this model. Training on a CPU would take ages.</p>
 
 <h3><a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Internals</h3>
 <p>Entire model is a global variable called <b>Plan</b>. To access it call <code>global plan</code>
