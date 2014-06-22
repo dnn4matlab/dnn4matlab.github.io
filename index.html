@@ -47,7 +47,8 @@ predictions[1:10]
 </code></pre>
 
 Evaluating a single image is quite slow in compare to evaluating many images in the same time. We recommend to store 128 images of the size 224 x 224 in a single array. 
-Code <a href="https://github.com/dnn4matlab/code/blob/master/eval128.m" target="_blank">eval128.m</a> shows how to evaluate 128 images simultaneously.</p>
+Code <a href="https://github.com/dnn4matlab/code/blob/master/eval128.m" target="_blank">eval128.m</a> shows how to evaluate 128 images simultaneously. This might take a second
+at first, because we download entire validation set from our servers.</p>
 <pre><code>load_imagenet_model();
 imgs = get_images()
 predictions = test(imgs);
@@ -61,7 +62,18 @@ end
 
 
 <h3><a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Train your own model</h3>
-<p></p>
+<h4><a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>MNIST</h4>
+
+<p>File <a href="https://github.com/dnn4matlab/code/blob/master/training.m" target="_blank">training.m</a> trains MNIST model. It first downloads MNIST dataset.</p>
+<pre><code>json = ParseJSON('plans/mnist.txt');
+Plan(json);
+Run();</code></pre>
+
+<p>Models are stored in directory <i>models</i>. After training MNIST model is available by calling:</p>
+<pre><code>load_model("mnist");</code></pre>
+
+<h4><a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>ImageNet</h4>
+<p>Training dataset for ImageNet is much bigger than MNIST. To get it you have to register on <a href="http://www.image-net.org/" target="_blank">Image-Net website</a>.</p>
 
 <h3><a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Internals</h3>
 <p></p>
