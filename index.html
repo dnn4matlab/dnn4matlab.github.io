@@ -28,10 +28,10 @@
         <h3>
 <a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Overview</h3>
 
-<p>dnn4matlab provides a fast CPU and GPU (CUDA) code to train large neural networks. Code is developed in Matlab, and contains CUDA bindings. With this code
-we deliver trained models on ImageNet dataset, which gives top-5 accuracy 13% on ImageNet validation set. Main focus of this code is to give reasonable computer vision models
-to people having no experience in field. If you look for broader (harder) framework then we recommend to use <a href="http://www.torch.ch" target="_blank">Torch 7</a>, or 
-<a href="http://deeplearning.net/software/theano/" target="_blank">Theano</a>, or <a href="http://caffe.berkeleyvision.org/" target="_blank">Caffe</a>. Feel free to use, modify and sell dnn4matlab for any purpose (commercial, or academic). Please just mention at the end where you get it from.</p>
+<p>dnn4matlab provides fast CPU and GPU (CUDA) code to train large neural networks. Code is developed in Matlab, and contains CUDA bindings. With this code
+we deliver trained models on ImageNet dataset, which gives top-5 accuracy of 17% on the ImageNet12 validation set. The main purpose of this code is to provide reasonable computer vision models
+for people who have little or no experience in field. If you are looking for more comprehensive (but also more complex) frameworks then we recommend <a href="http://www.torch.ch" target="_blank">Torch 7</a>, 
+<a href="http://deeplearning.net/software/theano/" target="_blank">Theano</a>, or <a href="http://caffe.berkeleyvision.org/" target="_blank">Caffe</a>. Feel free to use, modify and sell dnn4matlab for any purpose (commercial or academic), but please remember to mention where you got it from.</p>
 
 <p> To get started just checkout our repository:</p>
 <pre><code>$ git clone https://github.com/dnn4matlab/code
@@ -48,18 +48,19 @@ and call <code>make</code>.
 trained model from a server, and stores it into <a href="https://github.com/dnn4matlab/code/blob/master/models" target="_blank">/models</a> directory (this is done only once). 
 <script src="http://gist-it.appspot.com/github/dnn4matlab/code/blob/master/Eval.m?footer=0"></script>
 
-Evaluating a single image is quite slow in compare to evaluating many images in the same time. We recommend to store 128 images of the size 224 x 224 in a single array. 
-Code <a href="https://github.com/dnn4matlab/code/blob/master/Eval128.m" target="_blank">/Eval128.m</a> shows how to evaluate 128 images simultaneously. This might take a second
-at first, because we download entire imagenet validation set (50k images) from our servers.</p>
+Evaluating a single image is quite slow in comparison to evaluating a larger batch at the same time. We recommend a batch size of 128 images. 
+Code <a href="https://github.com/dnn4matlab/code/blob/master/Eval128.m" target="_blank">/Eval128.m</a> shows how to evaluate 128 images simultaneously. This will take some time the first time you call it because
+the code first downloads the entire ImageNet12 validation set (50k images) from our servers.</p>
 <script src="http://gist-it.appspot.com/github/dnn4matlab/code/blob/master/Eval128.m?footer=0"></script>
 
-<p>This code displays best prediction for every out of 128 examples.</p>
+<p>This code displays the prediction error out of 128 images.</p>
 
 <h3><a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Train your own model</h3>
-<p>Files in a directory <a href="https://github.com/dnn4matlab/code/blob/master/plans/" target="_blank">/plans</a> describe various neural networks architecture. 
-Feel free to define your own architectures, and try how they work. We provide reasonable architectures for MNIST, CIFAR-10, and ImageNet models.</p>
+<p>Files in the directory <a href="https://github.com/dnn4matlab/code/blob/master/plans/" target="_blank">/plans</a> describe various neural network architectures. 
+We provide reasonable architectures for MNIST, CIFAR-10, and ImageNet models.</p>
+You can use these as templates for your own architectures.
 
-Models available in this package achieve following performance (you can find current state-of-art at <a href="http://rodrigob.github.io/are_we_there_yet/build/classification_datasets_results.html" target="_blank">here</a>):
+Models available in this package achieve the following performance (you can find current state-of-art at <a href="http://rodrigob.github.io/are_we_there_yet/build/classification_datasets_results.html" target="_blank">here</a>):
 </br>
 </br>
 <center>
@@ -95,28 +96,28 @@ Models available in this package achieve following performance (you can find cur
 </table>
 </center>
 
-<p>File <a href="https://github.com/dnn4matlab/code/blob/master/Training.m" target="_blank">/Training.m</a> trains MNIST model. It first downloads MNIST dataset.</p>
+<p>The file <a href="https://github.com/dnn4matlab/code/blob/master/Training.m" target="_blank">/Training.m</a> trains MNIST model. It first downloads MNIST dataset.</p>
 <script src="http://gist-it.appspot.com/github/dnn4matlab/code/blob/master/Training.m?footer=0"></script>
 
-<p>Models are stored in directory <a href="https://github.com/dnn4matlab/code/blob/master/models" target="_blank">/models</a>. Call 
+<p>Models are stored in directory <a href="https://github.com/dnn4matlab/code/blob/master/models" target="_blank">/models</a>. Calling 
 <code>Plan('mnist');</code>
-loads most recently trained model. To start from scratch just remove trained model file models/mnist.mat.</p>
+loads the most recently trained model. To start from scratch just remove trained model file models/mnist.mat.</p>
 
 
-<p>If you want to train a cifar model uncomment line <code>Plan('cifar');</code>. To train ImageNet model you have to download training data from 
+<p>If you want to train a CIFAR model uncomment the line <code>Plan('cifar');</code>. To train ImageNet model you have to download training data from 
 <a href="http://www.image-net.org/" target="_blank">Image-Net website</a>.
 Please place entire training dataset in <a href="https://github.com/dnn4matlab/code/blob/master/data/imagenet" target="_blank">/data/imagenet</a> directory. Then uncomment line
-<code>Plan('imagenet');</code>, and start training.
-Training takes around 6 days on NVIDIA Titan GPU. You need at least GTX 480 to train this model. Training on a CPU would take ages.</p>
+<code>Plan('imagenet');</code> and start training.
+Training takes around 6 days on NVIDIA Titan GPU. You need at least GTX 480 to train this model. Training on a CPU is not recommended as it would take ages.</p>
 
 <h3><a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Internals</h3>
-<p>Entire model is a global variable called <b>Plan</b>. To access it call <code>global plan</code>.
-All layers are stored in a directory <a href="https://github.com/dnn4matlab/code/blob/master/layers" target="_blank">/layers</a>, and code to verify their correctness is a file <a href="https://github.com/dnn4matlab/code/blob/master/tests/GC.m" target="_blank">/tests/GC.m (gradient checker)</a>. To test new layer, please extend file <a href="https://github.com/dnn4matlab/code/blob/master/plans/tests.txt" target="_blank">/plans/tests.m</a>, and run <a href="https://github.com/dnn4matlab/code/blob/master/tests/GC.m" target="_blank">/tests/GC.m</a>. Moreover, to check that your GPU code is equivalent to your CPU code call <a href="https://github.com/dnn4matlab/code/blob/master/tests/GC_gpu.m" target="_blank">/tests/GC_gpu.m</a>.</p> 
+<p>Entire model is contained in a global variable called <b>Plan</b>. To access it call <code>global plan</code>.
+All the layer modules are stored in a directory <a href="https://github.com/dnn4matlab/code/blob/master/layers" target="_blank">/layers</a>, and code to verify their correctness is a file <a href="https://github.com/dnn4matlab/code/blob/master/tests/GC.m" target="_blank">/tests/GC.m (gradient checker)</a>. To test a new layer, please extend file <a href="https://github.com/dnn4matlab/code/blob/master/plans/tests.txt" target="_blank">/plans/tests.m</a> and run <a href="https://github.com/dnn4matlab/code/blob/master/tests/GC.m" target="_blank">/tests/GC.m</a>. Moreover, to check that your GPU code is equivalent to your CPU code call <a href="https://github.com/dnn4matlab/code/blob/master/tests/GC_gpu.m" target="_blank">/tests/GC_gpu.m</a>.</p> 
 
 
 <h3><a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors</h3>
 
-<p>Project developed by Emily Denton, <a href="http://www.cs.nyu.edu/~zaremba/" target="_blank">Wojciech Zaremba</a>, <a href="http://cims.nyu.edu/~bruna/" target="_blank">Joan Bruna</a>, and <a href="http://cs.nyu.edu/~fergus/" target="_blank">Rob Fergus</a>. If you use this package, please cite:</p>
+<p>This project is developed by Emily Denton, <a href="http://www.cs.nyu.edu/~zaremba/" target="_blank">Wojciech Zaremba</a>, <a href="http://cims.nyu.edu/~bruna/" target="_blank">Joan Bruna</a>, and <a href="http://cs.nyu.edu/~fergus/" target="_blank">Rob Fergus</a>. If you use this package, please cite:</p>
 <pre><code>@article{denton2014exploiting,
  title={Exploiting Linear Structure Within Convolutional Networks for Efficient Evaluation},
  author={Denton, Emily and Zaremba, Wojciech and Bruna, Joan and LeCun, Yann and Fergus, Rob},
